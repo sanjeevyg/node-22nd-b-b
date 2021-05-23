@@ -24,6 +24,45 @@ app.get("/dogs", (request, response) => {
         })
 })
 
+app.get("/dogs/:id", (request, response) => {
+    database("dogs")
+        .select()
+        .where({id: request.params.id}).first()
+        .then(dog => {
+            response.json({dog})
+        })
+})
+
+app.patch("/dogs/:id", (request, response) => {
+    const dog = request.body
+    database("dogs")
+        .where({id : request.params.id})
+        .update(dog)
+        .returning("*")
+        .then(dog => {
+            response.json({ dog })
+        })
+})
+
+app.post("/dogs", (request, resposne) => {
+    database("dogs")
+        .insert(dog)
+        .returning("*")
+        .then(dog => {
+            response.json({ dog })
+        })
+})
+
+app.delete("/dogs", (request, response) => {
+    const id = request.params.id
+    database("dogs")
+        .where({id: request.params.idx})
+        .delete()
+        .then(() => {
+            response.json({ message: `dog ${id} is deleted`})
+        })
+})
+
 app.listen(port, () => {
     console.log(`listening to ${port}`)
 })
