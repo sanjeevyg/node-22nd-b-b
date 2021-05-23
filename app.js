@@ -15,11 +15,7 @@ const port = 7000
 const { Model } = require("objection")
 Model.knex(database)
 
-class Dog extends Model {       //equivalent to class Dog < Model in Ruby
-    static get tableName() {
-        return 'dogs'
-    }
-}
+const Dog = require("./model/dogs")
 
 app.get("/dogs", (request, response) => {
     Dog.query()          // equivalent to Dog.all in ruby
