@@ -4,7 +4,7 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgress:///cats-table'
+    connection: "postgress:///cats-table"
   }
 
 };
