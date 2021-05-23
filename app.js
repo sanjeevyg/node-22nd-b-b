@@ -44,23 +44,22 @@ app.patch("/dogs/:id", (request, response) => {
         })
 })
 
-app.post("/dogs", (request, resposne) => {
+app.post("/dogs", (request, response) => {
+    const dog = request.body
     database("dogs")
         .insert(dog)
         .returning("*")
         .then(dog => {
-            response.json({ dog })
+            response.json({dog})
         })
 })
 
-app.delete("/dogs", (request, response) => {
+app.delete("/dogs/:id", (request, response) => {
     const id = request.params.id
     database("dogs")
-        .where({id: request.params.idx})
+        .where({id: request.params.id})
         .delete()
-        .then(() => {
-            response.json({ message: `dog ${id} is deleted`})
-        })
+        .then(() => response.send({message: `dog with id ${id} is deleted` }))
 })
 
 app.listen(port, () => {
