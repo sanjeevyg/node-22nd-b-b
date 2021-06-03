@@ -42,13 +42,13 @@ app.patch("/dogs/:id", (request, response) => {
         })
 })
 
-// app.post("/dogs", (request, response) => {
-//     const dog = request.body
-//         createDog(dog)
-//         .then(dog => {
-//             response.json({dog})
-//         })
-// })
+app.post("/dogs", (request, response) => {
+    const dog = request.body
+        createDog(dog)
+        .then(dog => {
+            response.json({dog})
+        })
+})
 
 app.delete("/dogs/:id", (request, response) => {
     const id = request.params.id
